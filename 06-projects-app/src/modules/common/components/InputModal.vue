@@ -1,0 +1,61 @@
+<template>
+  <dialog class="modal" :open="open">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">{{ title }}</h3>
+      <p v-if="subTitle" class="py-4">{{ subtitle }}</p>
+      <div class="modal-action flex flex-col">
+        <form method="dialog" @submit.prevent="submitValue">
+          <input
+            ref="inputRef"
+            class="input input-bordered input-primary w-full flex-1"
+            :placeholder="placeholder ?? 'Ingrese un valor'"
+            type="text"
+            v-model="inputValue"
+          />
+          <div class="flex justify-end mt-5">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn mr-4" type="button" @click="emits('close')">Close</button>
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+  <div
+    v-if="open"
+    class="modal-backdrop fixed top-0 left-0 z-10 bg-black opacity-50 w-screen h-screen"
+  ></div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+interface Props {
+  open: boolean;
+  title: string;
+  placeholder?: string;
+  subTitle?: string;
+}
+
+defineProps<Props>();
+
+const inputValue = ref('');
+const inputRef = ref<HTMLInputElement | null>(null);
+
+const emits = defineEmits<{
+  close: [void];
+  value: [string];
+}>();
+
+const submitValue = () => {
+  const value = inputValue.value.trim();
+  if (!value) {
+    inputRef.value?.focus();
+    return;
+  }
+
+  emits('value', value);
+  emits('close');
+  inputValue.value = '';
+};
+</script>
