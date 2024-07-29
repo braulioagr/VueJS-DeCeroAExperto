@@ -12,7 +12,13 @@ const router = createRouter({
         {
           path: 'projects',
           name: 'projects',
-          component: () => import('@projects/views/ProyectsView.vue'),
+          component: () => import('@projects/views/ProjectsView.vue'),
+        },
+        {
+          path: 'project/:id',
+          name: 'project',
+          props: true,
+          component: () => import('@projects/views/ProjectView.vue'),
         },
       ],
     },
