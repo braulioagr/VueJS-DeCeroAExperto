@@ -1,12 +1,11 @@
-import { tesloApi } from '@api/index';
-import type { LoginResponse } from '@auth/interfaces';
+import { tesloApi, ApiEndpoints } from '@api/index';
+import type { LoginResponse } from '@auth/types';
 import type { AuthResponse } from '@auth/interfaces/auth.response';
-import { ApiEndpoints } from '@common/constants';
-import { isAxiosError } from 'node_modules/axios/index.cjs';
+import { isAxiosError } from 'axios';
 
 export const loginAction = async (email: string, password: string): Promise<LoginResponse> => {
   try {
-    const { data } = await tesloApi.post<AuthResponse>(ApiEndpoints.UsersLogin, {
+    const { data } = await tesloApi.post<AuthResponse>(ApiEndpoints.AuthLogin, {
       email,
       password,
     });

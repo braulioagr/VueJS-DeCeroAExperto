@@ -1,5 +1,6 @@
-import { authRoutes } from '@/modules/auth/routes';
-import ShopLayout from '@/modules/shop/layouts/ShopLayout.vue';
+import { adminRoutes } from '@admin/routes';
+import { authRoutes } from '@auth/routes';
+import ShopLayout from '@shop/layouts/ShopLayout.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -18,6 +19,7 @@ const router = createRouter({
       ],
     },
     authRoutes,
+    adminRoutes,
   ],
 });
 
