@@ -8,6 +8,7 @@ import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 import App from './App.vue';
 import router from './router';
+import './config/yup.config';
 
 const app = createApp(App);
 app.use(VueQueryPlugin);
