@@ -198,7 +198,8 @@
         >
           <span class="leading-none">Item 6</span>
         </a>
-        <a
+        <RouterLink
+          to="/admin/products/create"
           class="flex items-center flex-shrink-0 h-10 px-3 mt-auto text-sm font-medium bg-blue-500 rounded hover:bg-blue-700 text-white"
           href="#"
         >
@@ -217,7 +218,7 @@
             />
           </svg>
           <span class="ml-2 leading-none">Nuevo Producto</span>
-        </a>
+        </RouterLink>
       </div>
     </div>
     <div class="flex flex-col flex-grow">
@@ -286,6 +287,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/modules/auth/stores';
 import { storeToRefs } from 'pinia';
+import { RouterLink } from 'vue-router';
 
 const { username } = storeToRefs(useAuthStore());
 </script>

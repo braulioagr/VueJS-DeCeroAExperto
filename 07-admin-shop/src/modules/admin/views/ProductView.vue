@@ -86,12 +86,26 @@
         <div v-for="image of images" :key="image.value" class="flex-shrink-0">
           <img :src="image.value" :alt="title" class="w-[250px] h-[250px] rounded" />
         </div>
+        <div v-for="imageFile of imageFiles" :key="imageFile.name" class="flex-shrink-0">
+          <img
+            :src="temporalImageUrl(imageFile)"
+            :alt="title"
+            class="w-[250px] h-[250px] rounded"
+          />
+        </div>
       </div>
       <!-- Upload image -->
       <div class="col-span-2 my-2">
         <label for="image" class="form-label">Subir imagen</label>
 
-        <input multiple type="file" id="image" class="form-control" />
+        <input
+          @change="onFileChange"
+          accept="image/*"
+          class="form-control"
+          id="image"
+          multiple
+          type="file"
+        />
       </div>
 
       <div class="mb-4">
@@ -109,7 +123,8 @@
       <div class="my-4 text-right">
         <button
           type="submit"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          :disabled="isPending"
+          class="disabled:bg-gray-300 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Guardar
         </button>
